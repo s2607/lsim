@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define W 10
+#include <malloc.h>
 #define AND 1
 #define NOT 2
 #define OR 3
@@ -13,12 +13,18 @@ typedef struct gate{
 	int t;
 	int o;
 }gate;
-gate gates[W];
+/*gate gates[W];
 int wires[W];
 int oldwires[W];
+*/
+gate *gates;
+int *wires;
+int *oldwires;
+int inw;
+int ing;
 void status() {
 	int i=0;
-	for(i=0;i<W;i++){
+	for(i=0;i<inw;i++){
 		printf(" %d",wires[i]);
 	}
 	printf("\n");
@@ -37,10 +43,10 @@ void eg(int n) {
 }
 void evaluate() {
 	int i=0;
-	for(i=0; i<W;i++) {
+	for(i=0; i<ing;i++) {
 		eg(i);
 	}
-	for(i=0;i<W;i++){
+	for(i=0;i<inw;i++){
 		oldwires[i]=wires[i];
 	}
 }
@@ -52,16 +58,23 @@ void getgate(int n) {
 }
 void readin() {
 	int i=0;
-	int ing=getchar()-'0';
+	ing=getchar()-'0';
+	ing=ing+(getchar()-'0')*10;
+	inw=getchar()-'0';
+	inw=inw+(getchar()-'0')*10;
+	gates=calloc(sizeof(gate)*ing,sizeof(gate));
+	wires=calloc(sizeof(int)*inw,sizeof(int));
+	oldwires=calloc(sizeof(int)*inw,sizeof(int));
+	
 	for(i=0;i<ing;i++){
 		getgate(i);
 	}
-	for(i=0;i<MAX_INW;i++){
+	for(i=0;i<inw;i++){
 		wires[i]=getchar()-'0';
 	}
 	printf("wires:");
 	status();
-	for(i=0;i<W;i++){
+	for(i=0;i<ing;i++){
 		pg(i);
 	}
 }
