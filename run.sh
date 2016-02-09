@@ -1,7 +1,9 @@
 #!/bin/bash
 #format:
-#first number is num of gates (0-9)
+#first is the number of iterations (00-99)
+#followed by number is num of gates (00-99)
+#followed by the number of wires(00-99)
 #followed by the gate definitions (inwrie1 inwire2 type outwire)
 # type is 1 and 2 not 3 or 4 xor (note that inwire2 is ignored for not)
 #after this is the initial state of all 10 wires
-cc g.c -o g && echo "100101401100000000" | ./g
+cc g.c -o g && echo "60100101401100000000" | ./g

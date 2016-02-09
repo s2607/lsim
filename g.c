@@ -22,6 +22,7 @@ int *wires;
 int *oldwires;
 int inw;
 int ing;
+int iterations;
 void status() {
 	int i=0;
 	for(i=0;i<inw;i++){
@@ -58,6 +59,8 @@ void getgate(int n) {
 }
 void readin() {
 	int i=0;
+	iterations=getchar()-'0';
+	iterations=iterations+(getchar()-'0')*10;
 	ing=getchar()-'0';
 	ing=ing+(getchar()-'0')*10;
 	inw=getchar()-'0';
@@ -83,7 +86,7 @@ int main() {
 //	init();
 	readin();
 	status();
-	for(i=0;i<MAX_ITER;i++){
+	for(i=0;i<iterations;i++){
 		evaluate();
 		status();
 	}
