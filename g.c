@@ -21,9 +21,13 @@ int iterations;
 
 int getnum(int l) {
 	int n=0;
-	int i=0;
-	for(;l>0;l--)
-		n=n+((getchar()-'0')*pow(10,l-1));
+	int a=' ';
+	for(;l>0;l--){
+		do {
+			a=getchar();
+		}while(a==' '||a=='\n');
+		n=n+((a-'0')*pow(10,l-1));
+	}
 	//printf("%d \n",n);
 	return n;
 }
