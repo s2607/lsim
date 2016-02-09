@@ -73,7 +73,8 @@ void getgate(int n) {
 }
 void readin() {
 	int i=0;
-	for(i=0;i<MAX_ING;i++){
+	int ing=getchar()-'0';
+	for(i=0;i<ing;i++){
 		getgate(i);
 	}
 	for(i=0;i<MAX_INW;i++){
