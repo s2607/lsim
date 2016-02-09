@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <malloc.h>
+#include <math.h>
 #define AND 1
 #define NOT 2
 #define OR 3
 #define XOR 4
-#define MAX_ITER 2
-#define MAX_INW 10
 
 typedef struct gate{
 	int a;
@@ -13,16 +12,21 @@ typedef struct gate{
 	int t;
 	int o;
 }gate;
-/*gate gates[W];
-int wires[W];
-int oldwires[W];
-*/
 gate *gates;
 int *wires;
 int *oldwires;
 int inw;
 int ing;
 int iterations;
+
+int getnum(int l) {
+	int n=0;
+	int i=0;
+	for(;l>0;l--)
+		n=n+((getchar()-'0')*pow(10,l-1));
+	//printf("%d \n",n);
+	return n;
+}
 void status() {
 	int i=0;
 	for(i=0;i<inw;i++){
@@ -52,19 +56,17 @@ void evaluate() {
 	}
 }
 void getgate(int n) {
-	gates[n].a=getchar()-'0';
-	gates[n].b=getchar()-'0';
-	gates[n].t=getchar()-'0';
-	gates[n].o=getchar()-'0';
+	gates[n].a=getnum(1);
+	gates[n].b=getnum(1);
+	gates[n].t=getnum(1);
+	gates[n].o=getnum(1);
+
 }
 void readin() {
 	int i=0;
-	iterations=getchar()-'0';
-	iterations=iterations+(getchar()-'0')*10;
-	ing=getchar()-'0';
-	ing=ing+(getchar()-'0')*10;
-	inw=getchar()-'0';
-	inw=inw+(getchar()-'0')*10;
+	iterations=getnum(2);
+	ing=getnum(2);
+	inw=getnum(2);
 	gates=calloc(sizeof(gate)*ing,sizeof(gate));
 	wires=calloc(sizeof(int)*inw,sizeof(int));
 	oldwires=calloc(sizeof(int)*inw,sizeof(int));
@@ -73,7 +75,7 @@ void readin() {
 		getgate(i);
 	}
 	for(i=0;i<inw;i++){
-		wires[i]=getchar()-'0';
+		wires[i]=getnum(1);
 	}
 	printf("wires:");
 	status();
